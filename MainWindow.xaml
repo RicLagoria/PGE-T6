@@ -37,7 +37,7 @@
             <TabItem Header="E3 - Registro Gastos">
                 <views:Ej03View/>
             </TabItem>
-            <TabItem Header="E4">
+            <TabItem Header="E4 - Visualización de Datos">
                 <views:Ej04View/>
             </TabItem>
             <TabItem Header="E5 - Editor Imágenes">
