@@ -25,7 +25,7 @@ namespace PGE_T6.Views
         {
             InitializeComponent();
             Loaded += (_, __) => DibujarGrafico();
-            SizeChanged += (_, __) => DibujarGrafico();
+            SizeChanged += (_, __) => { if (IsLoaded) DibujarGrafico(); };
         }
 
         private void BtnActualizar_Click(object sender, RoutedEventArgs e)
@@ -35,22 +35,24 @@ namespace PGE_T6.Views
 
         private void CmbDataset_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!IsLoaded) return;
             DibujarGrafico();
         }
 
         private string DatasetSeleccionado()
         {
-            if (cmbDataset.SelectedItem is ComboBoxItem item && item.Tag is string tag)
+            if (cmbDataset != null && cmbDataset.SelectedItem is ComboBoxItem item && item.Tag is string tag)
                 return tag;
             return "2024";
         }
 
         private void DibujarGrafico()
         {
+            if (cnvChart == null) return;
+
             cnvChart.Children.Clear();
 
-            var datos = _datosPorDataset[DatasetSeleccionado()];
-            if (datos == null || datos.Length == 0)
+            if (!_datosPorDataset.TryGetValue(DatasetSeleccionado(), out var datos) || datos == null || datos.Length == 0)
                 return;
 
             double width = cnvChart.ActualWidth;
@@ -70,18 +72,15 @@ namespace PGE_T6.Views
             double plotWidth = width - marginLeft - marginRight;
             double plotHeight = height - marginTop - marginBottom;
 
-            // Ejes
             var ejeX = new Line { X1 = marginLeft, Y1 = marginTop + plotHeight, X2 = marginLeft + plotWidth, Y2 = marginTop + plotHeight, Stroke = Brushes.Gray };
             var ejeY = new Line { X1 = marginLeft, Y1 = marginTop, X2 = marginLeft, Y2 = marginTop + plotHeight, Stroke = Brushes.Gray };
             cnvChart.Children.Add(ejeX);
             cnvChart.Children.Add(ejeY);
 
             double maxValor = Math.Max(1, datos.Max());
-            // Redondear escala a múltiplos "bonitos"
             double step = CalcularPasoBonito(maxValor / 5.0);
             double maxEscala = Math.Ceiling(maxValor / step) * step;
 
-            // Grid horizontal y ticks de eje Y
             for (double v = 0; v <= maxEscala + 0.001; v += step)
             {
                 double y = marginTop + plotHeight - (v / maxEscala) * plotHeight;
@@ -129,13 +128,15 @@ namespace PGE_T6.Views
             }
 
             double total = datos.Sum();
-            txtInfo.Text = $"Dataset: {DatasetSeleccionado()}  •  Máximo: {maxValor:N0}  •  Total: {total:N0}";
+            if (txtInfo != null)
+            {
+                txtInfo.Text = $"Dataset: {DatasetSeleccionado()}  •  Máximo: {maxValor:N0}  •  Total: {total:N0}";
+            }
         }
 
         private static double CalcularPasoBonito(double valor)
         {
-            // Aproxima a 1, 2, 5, 10 ... * 10^n
-            double potencia = Math.Pow(10, Math.Floor(Math.Log10(valor)));
+            double potencia = Math.Pow(10, Math.Floor(Math.Log10(Math.Max(1e-6, valor))));
             double numero = valor / potencia;
             double basePaso = numero <= 1 ? 1 : numero <= 2 ? 2 : numero <= 5 ? 5 : 10;
             return basePaso * potencia;
