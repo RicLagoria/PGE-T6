@@ -1,0 +1,34 @@
+<UserControl x:Class="PGE_T6.Views.Ej01View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="EJERCICIO 1: CONVERTIR TEMPERATURA" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <Border Grid.Row="1" Padding="20" Background="White" CornerRadius="8" >
+            <StackPanel>
+                <TextBlock Text="Ingrese temperatura en Celsius:"/>
+                <TextBox x:Name="txtCelsius" ToolTip="Ingresa un valor numérico"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="btnConvertir" Content="Convertir a Fahrenheit" Click="BtnConvertir_Click"/>
+                    <Button Content="Limpiar" Margin="8,0,0,0" Click="BtnLimpiar_Click"/>
+                </StackPanel>
+
+                <TextBlock Text="Resultado:" FontWeight="SemiBold" Margin="0,12,0,0"/>
+                <TextBlock x:Name="txtResultado" Text="—" FontSize="16" FontWeight="Bold"/>
+
+                <TextBlock Text="Fórmula: F = (C × 9/5) + 32" FontSize="12" Margin="0,12,0,0"/>
+                <TextBlock x:Name="txtError" Foreground="Crimson"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
+

@@ -1,1 +1,56 @@
 # PGE-T6
+
+Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. El Ejercicio 1 (Conversor de Temperatura) está implementado con code-behind y validación regional para Argentina (es-AR).
+
+## Estructura
+
+```
+PGE-T6/
+├── App.xaml
+├── MainWindow.xaml
+├── Views/
+│   ├── Ej01View.xaml
+│   ├── Ej01View.xaml.cs
+│   ├── Ej02View.xaml (placeholder)
+│   ├── Ej03View.xaml (placeholder)
+│   ├── Ej04View.xaml (placeholder)
+│   ├── Ej05View.xaml (placeholder)
+│   ├── Ej06View.xaml (placeholder)
+│   ├── Ej07View.xaml (placeholder)
+│   ├── Ej08View.xaml (placeholder)
+│   ├── Ej09View.xaml (placeholder)
+│   ├── Ej10View.xaml (placeholder)
+│   └── Ej11View.xaml (placeholder)
+├── Themes/
+│   └── Styles.xaml
+└── Assets/
+```
+
+## Ejercicio 1: Conversor de Temperatura
+
+- Entrada: Celsius (acepta coma decimal siguiendo cultura es-AR)
+- Conversión: F = (C × 9/5) + 32
+- Validaciones:
+  - Campo vacío
+  - Texto no numérico
+  - Menor al cero absoluto (−273,15 °C)
+- Resultado formateado con 2 decimales: "77,00 °F" (según cultura)
+
+## Ejecutar
+
+```
+dotnet build
+dotnet run
+```
+
+## Casos de prueba (E1)
+
+| Entrada | Resultado Esperado | Descripción |
+|---|---|---|
+| 25 | 77,00 °F | Temperatura ambiente |
+| 0 | 32,00 °F | Punto de congelación |
+| -10 | 14,00 °F | Temperatura negativa |
+| 36,5 | 97,70 °F | Temperatura corporal |
+| "" | Error | Campo vacío |
+| "abc" | Error | Texto no numérico |
+| -300 | Error | Menor al cero absoluto |

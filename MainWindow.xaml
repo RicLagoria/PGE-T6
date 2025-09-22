@@ -4,9 +4,43 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PGE_T6"
+        xmlns:views="clr-namespace:PGE_T6.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="PGE Tarea 6 - Entorno Gráfico" Height="600" Width="900">
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource HeaderBrush}" Padding="20,15">
+            <StackPanel>
+                <TextBlock Text="PGE - Tarea 6: Entorno Gráfico"
+                           FontSize="24" FontWeight="Bold"
+                           Foreground="{StaticResource HeaderTextBrush}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="11 Ejercicios de Aprendizaje WPF"
+                           FontSize="14" Foreground="{StaticResource SubHeaderTextBrush}"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- TabControl con 11 pestañas -->
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="E1 - Conversor Temp.">
+                <views:Ej01View/>
+            </TabItem>
+            <TabItem Header="E2"/>
+            <TabItem Header="E3"/>
+            <TabItem Header="E4"/>
+            <TabItem Header="E5"/>
+            <TabItem Header="E6"/>
+            <TabItem Header="E7"/>
+            <TabItem Header="E8"/>
+            <TabItem Header="E9"/>
+            <TabItem Header="E10"/>
+            <TabItem Header="E11"/>
+        </TabControl>
     </Grid>
 </Window>
