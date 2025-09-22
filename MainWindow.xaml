@@ -46,7 +46,9 @@
             <TabItem Header="E6 - Conversor Divisas">
                 <views:Ej06View/>
             </TabItem>
-            <TabItem Header="E7"/>
+            <TabItem Header="E7 - Juego Adivinanza">
+                <views:Ej07View/>
+            </TabItem>
             <TabItem Header="E8"/>
             <TabItem Header="E9"/>
             <TabItem Header="E10"/>
