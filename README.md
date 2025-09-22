@@ -1,6 +1,6 @@
 # PGE-T6
 
-Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. El Ejercicio 1 (Conversor de Temperatura) está implementado con code-behind y validación regional para Argentina (es-AR). El Ejercicio 2 (Dibujo Libre) permite trazar líneas sobre un Canvas con selección de color y grosor.
+Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. Ejercicios implementados: Conversor de Temperatura (E1), Dibujo Libre (E2), Registro de Gastos (E3), Visualización de Datos (E4), Editor de Imágenes (E5). Todos con code-behind y validación regional para Argentina (es-AR).
 
 ## Estructura
 
@@ -17,7 +17,8 @@ PGE-T6/
 │   ├── Ej03View.xaml.cs
 │   ├── Ej04View.xaml
 │   ├── Ej04View.xaml.cs
-│   ├── Ej05View.xaml (placeholder)
+│   ├── Ej05View.xaml
+│   ├── Ej05View.xaml.cs
 │   ├── Ej06View.xaml (placeholder)
 │   ├── Ej07View.xaml (placeholder)
 │   ├── Ej08View.xaml (placeholder)
@@ -85,4 +86,13 @@ dotnet run
 - Selector de dataset (Ventas 2023, 2024, 2025) y botón Actualizar.
 - Etiquetas de mes en el eje X e indicadores de valor sobre cada barra.
 - Texto inferior con métricas: máximo y total del dataset.
+
+## Ejercicio 5: Editor de Imágenes
+
+- Carga de imágenes: `OpenFileDialog` para seleccionar archivos (JPG, PNG, BMP, GIF).
+- Visualización: `Image` control con `ScrollViewer` para imágenes grandes.
+- Edición de tamaño: `Slider` de 10% a 200% con redimensionado proporcional.
+- Ajuste de brillo: `Slider` de -100 a +100 con manipulación de píxeles RGBA.
+- Funciones: Aplicar cambios, guardar imagen (`SaveFileDialog`) y restaurar original.
+- Formatos de guardado: PNG, JPEG, BMP según extensión seleccionada.
 
