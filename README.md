@@ -15,7 +15,8 @@ PGE-T6/
 │   ├── Ej02View.xaml.cs
 │   ├── Ej03View.xaml
 │   ├── Ej03View.xaml.cs
-│   ├── Ej04View.xaml (placeholder)
+│   ├── Ej04View.xaml
+│   ├── Ej04View.xaml.cs
 │   ├── Ej05View.xaml (placeholder)
 │   ├── Ej06View.xaml (placeholder)
 │   ├── Ej07View.xaml (placeholder)
@@ -76,4 +77,12 @@ dotnet run
   - Cálculo: totalARS / tipoCambio → total en moneda objetivo.
 - Validaciones: campos vacíos, valor/tipo de cambio no numérico o ≤ 0.
 - Mensajes de error y total convertido mostrado en la UI.
+
+## Ejercicio 4: Visualización de Datos (Barras)
+
+- Canvas para graficar barras de ventas mensuales con ejes X/Y.
+- Ticks y líneas de cuadrícula horizontales con escala "bonita" automática.
+- Selector de dataset (Ventas 2023, 2024, 2025) y botón Actualizar.
+- Etiquetas de mes en el eje X e indicadores de valor sobre cada barra.
+- Texto inferior con métricas: máximo y total del dataset.
 

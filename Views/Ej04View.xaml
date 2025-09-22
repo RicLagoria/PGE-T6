@@ -13,6 +13,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Dataset:" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cmbDataset" Width="200" Margin="8,0,0,0" SelectedIndex="0" SelectionChanged="CmbDataset_SelectionChanged">
+                    <ComboBoxItem Content="Ventas 2023" Tag="2023"/>
                     <ComboBoxItem Content="Ventas 2024" Tag="2024"/>
                     <ComboBoxItem Content="Ventas 2025" Tag="2025"/>
                 </ComboBox>

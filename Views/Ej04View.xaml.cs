@@ -14,6 +14,7 @@ namespace PGE_T6.Views
         private readonly CultureInfo _cultureArgentina = new CultureInfo("es-AR");
         private readonly Dictionary<string, double[]> _datosPorDataset = new Dictionary<string, double[]>
         {
+            { "2023", new double[] { 80, 90, 70, 120, 140, 110, 100, 105, 130, 150, 160, 170 } },
             { "2024", new double[] { 120, 150, 90, 180, 220, 160, 130, 140, 200, 210, 170, 190 } },
             { "2025", new double[] { 100, 130, 110, 160, 190, 200, 220, 210, 240, 230, 250, 260 } }
         };
@@ -57,16 +58,14 @@ namespace PGE_T6.Views
 
             if (width <= 0 || height <= 0)
             {
-                // Estimar tamaño si aún no midió
-                width = 600;
-                height = 320;
+                width = 700;
+                height = 360;
             }
 
-            // Márgenes
-            const double marginLeft = 40;
-            const double marginBottom = 30;
-            const double marginTop = 10;
-            const double marginRight = 10;
+            const double marginLeft = 48;
+            const double marginBottom = 32;
+            const double marginTop = 16;
+            const double marginRight = 16;
 
             double plotWidth = width - marginLeft - marginRight;
             double plotHeight = height - marginTop - marginBottom;
@@ -77,16 +76,34 @@ namespace PGE_T6.Views
             cnvChart.Children.Add(ejeX);
             cnvChart.Children.Add(ejeY);
 
-            // Escala
             double maxValor = Math.Max(1, datos.Max());
+            // Redondear escala a múltiplos "bonitos"
+            double step = CalcularPasoBonito(maxValor / 5.0);
+            double maxEscala = Math.Ceiling(maxValor / step) * step;
+
+            // Grid horizontal y ticks de eje Y
+            for (double v = 0; v <= maxEscala + 0.001; v += step)
+            {
+                double y = marginTop + plotHeight - (v / maxEscala) * plotHeight;
+                var gridLine = new Line { X1 = marginLeft, Y1 = y, X2 = marginLeft + plotWidth, Y2 = y, Stroke = new SolidColorBrush(Color.FromRgb(230,230,230)) };
+                cnvChart.Children.Add(gridLine);
+
+                var tick = new Line { X1 = marginLeft - 4, Y1 = y, X2 = marginLeft, Y2 = y, Stroke = Brushes.Gray };
+                cnvChart.Children.Add(tick);
+
+                var etiqueta = new TextBlock { Text = v.ToString("N0", _cultureArgentina), FontSize = 10 };
+                Canvas.SetLeft(etiqueta, 2);
+                Canvas.SetTop(etiqueta, y - 8);
+                cnvChart.Children.Add(etiqueta);
+            }
+
             double barWidth = plotWidth / datos.Length * 0.6;
             double slotWidth = plotWidth / datos.Length;
 
-            // Barras y etiquetas
             for (int i = 0; i < datos.Length; i++)
             {
                 double valor = datos[i];
-                double barHeight = (valor / maxValor) * plotHeight;
+                double barHeight = (valor / maxEscala) * plotHeight;
                 double x = marginLeft + (i * slotWidth) + (slotWidth - barWidth) / 2.0;
                 double y = marginTop + plotHeight - barHeight;
 
@@ -113,6 +130,15 @@ namespace PGE_T6.Views
 
             double total = datos.Sum();
             txtInfo.Text = $"Dataset: {DatasetSeleccionado()}  •  Máximo: {maxValor:N0}  •  Total: {total:N0}";
+        }
+
+        private static double CalcularPasoBonito(double valor)
+        {
+            // Aproxima a 1, 2, 5, 10 ... * 10^n
+            double potencia = Math.Pow(10, Math.Floor(Math.Log10(valor)));
+            double numero = valor / potencia;
+            double basePaso = numero <= 1 ? 1 : numero <= 2 ? 2 : numero <= 5 ? 5 : 10;
+            return basePaso * potencia;
         }
     }
 }
