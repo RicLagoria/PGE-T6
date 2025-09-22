@@ -18,6 +18,8 @@ namespace PGE_T6.Views
             InitializeComponent();
             _gastos = new ObservableCollection<Gasto>();
             dgGastos.ItemsSource = _gastos;
+            _gastos.CollectionChanged += (s, e) => ActualizarTotalARS();
+            ActualizarTotalARS();
         }
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
@@ -63,6 +65,8 @@ namespace PGE_T6.Views
             txtDescripcion.Text = string.Empty;
             txtValor.Text = string.Empty;
             txtDescripcion.Focus();
+
+            ActualizarTotalARS();
         }
 
         private void BtnConvertir_Click(object sender, RoutedEventArgs e)
@@ -103,6 +107,15 @@ namespace PGE_T6.Views
 
             var simboloMoneda = ObtenerSimboloMoneda(monedaSeleccionada);
             txtTotalConvertido.Text = $"Total: {totalARS:C} ARS = {totalConvertido:F2} {simboloMoneda}";
+        }
+
+        private void ActualizarTotalARS()
+        {
+            var total = _gastos.Sum(g => g.ValorARS);
+            if (txtTotalARS != null)
+            {
+                txtTotalARS.Text = total.ToString("C", _cultureArgentina);
+            }
         }
 
         private string ObtenerSimboloMoneda(string codigoMoneda)
