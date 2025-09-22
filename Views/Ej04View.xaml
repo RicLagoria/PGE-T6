@@ -2,7 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid Background="{StaticResource BackgroundBrush}">
-        <TextBlock Text="Placeholder Ejercicio 4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Controles -->
+        <Border Grid.Row="0" Background="White" Padding="12" CornerRadius="6" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Dataset:" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbDataset" Width="200" Margin="8,0,0,0" SelectedIndex="0" SelectionChanged="CmbDataset_SelectionChanged">
+                    <ComboBoxItem Content="Ventas 2024" Tag="2024"/>
+                    <ComboBoxItem Content="Ventas 2025" Tag="2025"/>
+                </ComboBox>
+                <Button Content="Actualizar" Margin="12,0,0,0" Click="BtnActualizar_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Área del gráfico -->
+        <Border Grid.Row="1" Background="White" CornerRadius="6" Padding="10">
+            <Grid>
+                <Canvas x:Name="cnvChart"/>
+            </Grid>
+        </Border>
+
+        <!-- Leyenda / Información -->
+        <TextBlock Grid.Row="2" x:Name="txtInfo" Margin="0,8,0,0" TextAlignment="Center"/>
     </Grid>
 </UserControl>
 
