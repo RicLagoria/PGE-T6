@@ -2,7 +2,93 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid Background="{StaticResource BackgroundBrush}">
-        <TextBlock Text="Placeholder Ejercicio 6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="EJERCICIO 6: CONVERSOR DE DIVISAS" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <!-- Panel de entrada -->
+        <Border Grid.Row="0" Background="White" Padding="15" CornerRadius="6" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="Conversión de Monedas" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Entrada -->
+                    <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="Ingrese el valor:" Margin="0,0,0,5"/>
+                        <TextBox x:Name="txtValor" Text="1000" FontSize="16" Padding="10"/>
+                        <TextBlock x:Name="txtError" Foreground="Crimson" Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- Botón convertir -->
+                    <Button Grid.Column="1" Content="🔄" FontSize="20" Width="50" Height="50" 
+                            Click="BtnConvertir_Click" VerticalAlignment="Bottom" Margin="0,0,15,0"/>
+
+                    <!-- Selector de moneda base -->
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Moneda base:" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="cmbMonedaBase" SelectedIndex="0" FontSize="14">
+                            <ComboBoxItem Content="ARS - Peso Argentino" Tag="ARS"/>
+                            <ComboBoxItem Content="USD - Dólar Estadounidense" Tag="USD"/>
+                            <ComboBoxItem Content="EUR - Euro" Tag="EUR"/>
+                            <ComboBoxItem Content="BRL - Real Brasileño" Tag="BRL"/>
+                            <ComboBoxItem Content="CLP - Peso Chileno" Tag="CLP"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Resultados de conversión -->
+        <Border Grid.Row="1" Background="White" Padding="15" CornerRadius="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Conversiones" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="icConversiones">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F8F9FA" BorderBrush="#E5E5E5" BorderThickness="1" 
+                                        CornerRadius="4" Padding="12" Margin="0,0,0,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding Simbolo}" FontSize="24" 
+                                                   FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                        
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Nombre}" FontSize="14" FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding Codigo}" FontSize="12" Foreground="#666"/>
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="2" Text="{Binding Valor, StringFormat='{}{0:N2}'}" 
+                                                   FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
 

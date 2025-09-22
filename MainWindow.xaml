@@ -43,7 +43,9 @@
             <TabItem Header="E5 - Editor Imágenes">
                 <views:Ej05View/>
             </TabItem>
-            <TabItem Header="E6"/>
+            <TabItem Header="E6 - Conversor Divisas">
+                <views:Ej06View/>
+            </TabItem>
             <TabItem Header="E7"/>
             <TabItem Header="E8"/>
             <TabItem Header="E9"/>
