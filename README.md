@@ -1,6 +1,6 @@
 # PGE-T6
 
-Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. Ejercicios implementados: Conversor de Temperatura (E1), Dibujo Libre (E2), Registro de Gastos (E3), Visualización de Datos (E4), Editor de Imágenes (E5). Todos con code-behind y validación regional para Argentina (es-AR).
+Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. Ejercicios implementados: Conversor de Temperatura (E1), Dibujo Libre (E2), Registro de Gastos (E3), Visualización de Datos (E4), Editor de Imágenes (E5), Conversor de Divisas (E6). Todos con code-behind y validación regional para Argentina (es-AR).
 
 ## Estructura
 
@@ -19,7 +19,8 @@ PGE-T6/
 │   ├── Ej04View.xaml.cs
 │   ├── Ej05View.xaml
 │   ├── Ej05View.xaml.cs
-│   ├── Ej06View.xaml (placeholder)
+│   ├── Ej06View.xaml
+│   ├── Ej06View.xaml.cs
 │   ├── Ej07View.xaml (placeholder)
 │   ├── Ej08View.xaml (placeholder)
 │   ├── Ej09View.xaml (placeholder)
@@ -95,4 +96,12 @@ dotnet run
 - Ajuste de brillo: `Slider` de -100 a +100 con manipulación de píxeles RGBA.
 - Funciones: Aplicar cambios, guardar imagen (`SaveFileDialog`) y restaurar original.
 - Formatos de guardado: PNG, JPEG, BMP según extensión seleccionada.
+
+## Ejercicio 6: Conversor de Divisas
+
+- Entrada: valor numérico con validación (cultura es-AR) y selector de moneda base.
+- Monedas soportadas: ARS, USD, EUR, BRL, CLP con tipos de cambio predefinidos.
+- Conversión automática: al cambiar valor o moneda base, se actualizan todas las conversiones.
+- Visualización: tarjetas con scroll mostrando símbolo, nombre, código y valor convertido.
+- Interfaz: botón de conversión manual y actualización en tiempo real.
 
