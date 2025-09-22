@@ -1,8 +1,107 @@
 <UserControl x:Class="PGE_T6.Views.Ej08View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
     <Grid Background="{StaticResource BackgroundBrush}">
-        <TextBlock Text="Placeholder Ejercicio 8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="EJERCICIO 8: CALCULADORA DE PROPINAS" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <Border Grid.Row="1" Padding="20" Background="White" CornerRadius="8">
+            <StackPanel>
+                <TextBlock Text="Calcula la propina de tu cuenta" FontSize="18" FontWeight="Bold" 
+                           HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                
+                <!-- Monto de la cuenta -->
+                <TextBlock Text="Monto de la cuenta:" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <TextBlock Text="$" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" 
+                               Margin="0,0,5,0"/>
+                    <TextBox x:Name="txtMonto" Width="150" TextAlignment="Right" 
+                             ToolTip="Ingresa el monto total de la cuenta"
+                             KeyDown="TxtMonto_KeyDown"/>
+                </StackPanel>
+
+                <!-- Porcentaje de propina -->
+                <TextBlock Text="Porcentaje de propina:" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <ComboBox x:Name="cmbPorcentaje" Width="100" SelectedIndex="1">
+                        <ComboBoxItem Content="10%"/>
+                        <ComboBoxItem Content="15%" IsSelected="True"/>
+                        <ComboBoxItem Content="20%"/>
+                        <ComboBoxItem Content="25%"/>
+                    </ComboBox>
+                    <TextBlock Text="o personalizado:" VerticalAlignment="Center" Margin="20,0,10,0"/>
+                    <TextBox x:Name="txtPorcentajePersonalizado" Width="80" TextAlignment="Right" 
+                             ToolTip="Ingresa un porcentaje personalizado (ej: 18)"/>
+                    <TextBlock Text="%" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+
+                <!-- Botón calcular -->
+                <Button x:Name="btnCalcular" Content="Calcular Propina" 
+                        HorizontalAlignment="Center" Margin="0,0,0,30" 
+                        Click="BtnCalcular_Click" IsDefault="True"/>
+
+                <!-- Resultados -->
+                <Border Background="#F0F8FF" Padding="20" CornerRadius="8" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="RESULTADOS" FontSize="16" FontWeight="Bold" 
+                                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Monto de la cuenta:" 
+                                       FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="txtMontoCuenta" Grid.Row="0" Grid.Column="1" 
+                                       Text="—" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Porcentaje de propina:" 
+                                       FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="txtPorcentajeUsado" Grid.Row="1" Grid.Column="1" 
+                                       Text="—" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Propina:" 
+                                       FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="txtPropina" Grid.Row="2" Grid.Column="1" 
+                                       Text="—" FontWeight="Bold" Margin="0,0,0,8" 
+                                       Foreground="#2E8B57"/>
+
+                            <Border Grid.Row="3" Grid.ColumnSpan="2" Background="#E6F3FF" 
+                                    Padding="10" CornerRadius="5" Margin="0,10,0,0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="TOTAL A PAGAR: " FontWeight="Bold" FontSize="16"/>
+                                    <TextBlock x:Name="txtTotal" Text="—" FontWeight="Bold" 
+                                               FontSize="18" Foreground="#1E90FF"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Botón limpiar -->
+                <Button Content="Limpiar" HorizontalAlignment="Center" 
+                        Click="BtnLimpiar_Click"/>
+
+                <!-- Mensaje de error -->
+                <TextBlock x:Name="txtError" Foreground="Crimson" Margin="0,15,0,0" 
+                           HorizontalAlignment="Center" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
 

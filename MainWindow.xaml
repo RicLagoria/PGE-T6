@@ -49,7 +49,9 @@
             <TabItem Header="E7 - Juego Adivinanza">
                 <views:Ej07View/>
             </TabItem>
-            <TabItem Header="E8"/>
+            <TabItem Header="E8 - Calculadora Propinas">
+                <views:Ej08View/>
+            </TabItem>
             <TabItem Header="E9"/>
             <TabItem Header="E10"/>
             <TabItem Header="E11"/>

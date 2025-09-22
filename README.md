@@ -1,6 +1,6 @@
 # PGE-T6
 
-Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. Ejercicios implementados: Conversor de Temperatura (E1), Dibujo Libre (E2), Registro de Gastos (E3), Visualización de Datos (E4), Editor de Imágenes (E5), Conversor de Divisas (E6), Juego de Adivinanza (E7). Todos con code-behind y validación regional para Argentina (es-AR).
+Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. Ejercicios implementados: Conversor de Temperatura (E1), Dibujo Libre (E2), Registro de Gastos (E3), Visualización de Datos (E4), Editor de Imágenes (E5), Conversor de Divisas (E6), Juego de Adivinanza (E7), Calculadora de Propinas (E8). Todos con code-behind y validación regional para Argentina (es-AR).
 
 ## Estructura
 
@@ -23,7 +23,8 @@ PGE-T6/
 │   ├── Ej06View.xaml.cs
 │   ├── Ej07View.xaml
 │   ├── Ej07View.xaml.cs
-│   ├── Ej08View.xaml (placeholder)
+│   ├── Ej08View.xaml
+│   ├── Ej08View.xaml.cs
 │   ├── Ej09View.xaml (placeholder)
 │   ├── Ej10View.xaml (placeholder)
 │   └── Ej11View.xaml (placeholder)
@@ -114,4 +115,13 @@ dotnet run
 - Pistas visuales: mensajes con colores y emojis indicando si el número es mayor/menor.
 - Funcionalidades: contador de intentos, mensaje de felicitación al ganar, botón "Nuevo Juego".
 - Navegación: tecla Enter para adivinar rápidamente, interfaz responsive con estilos consistentes.
+
+## Ejercicio 8: Calculadora de Propinas
+
+- Entrada: monto de la cuenta con validación (cultura es-AR) y símbolo $.
+- Porcentajes: ComboBox con opciones predefinidas (10%, 15%, 20%, 25%) + campo personalizado.
+- Cálculo: propina = monto × (porcentaje ÷ 100), total = monto + propina.
+- Resultados: desglose completo con monto original, porcentaje usado, propina y total final.
+- Validaciones: campos vacíos, números inválidos, montos ≤ 0, porcentajes fuera de 0-100%.
+- UI: área de resultados destacada con colores diferenciados y formateo profesional.
 
