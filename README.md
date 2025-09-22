@@ -13,7 +13,8 @@ PGE-T6/
 │   ├── Ej01View.xaml.cs
 │   ├── Ej02View.xaml
 │   ├── Ej02View.xaml.cs
-│   ├── Ej03View.xaml (placeholder)
+│   ├── Ej03View.xaml
+│   ├── Ej03View.xaml.cs
 │   ├── Ej04View.xaml (placeholder)
 │   ├── Ej05View.xaml (placeholder)
 │   ├── Ej06View.xaml (placeholder)
@@ -64,4 +65,15 @@ dotnet run
   - Color seleccionable (`ComboBox`): Negro, Rojo, Verde, Azul, Naranja, Violeta.
   - Grosor ajustable (`Slider`) de 1 a 12 px.
 - Botón "Limpiar" para borrar el lienzo.
+
+## Ejercicio 3: Registro de Gastos con Conversión
+
+- Entrada de gasto: descripción y valor en ARS (cultura es-AR).
+- Listado: DataGrid con columnas Descripción, Valor (ARS) y Fecha.
+- Conversión de moneda:
+  - Selección de moneda objetivo: USD, EUR, BRL, CLP.
+  - Tipo de cambio manual (ARS por 1 unidad de la moneda objetivo).
+  - Cálculo: totalARS / tipoCambio → total en moneda objetivo.
+- Validaciones: campos vacíos, valor/tipo de cambio no numérico o ≤ 0.
+- Mensajes de error y total convertido mostrado en la UI.
 

@@ -34,7 +34,9 @@
             <TabItem Header="E2 - Dibujo Libre">
                 <views:Ej02View/>
             </TabItem>
-            <TabItem Header="E3"/>
+            <TabItem Header="E3 - Registro Gastos">
+                <views:Ej03View/>
+            </TabItem>
             <TabItem Header="E4"/>
             <TabItem Header="E5"/>
             <TabItem Header="E6"/>
