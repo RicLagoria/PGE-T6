@@ -19,21 +19,49 @@ namespace PGE_T6.Views
         {
             txtError.Text = string.Empty;
             
-            // Validar monto de la cuenta
-            if (!ValidarMonto())
-                return;
+            try
+            {
+                // Validar monto de la cuenta
+                if (!ValidarMonto())
+                {
+                    txtError.Text += " [Debug: Validación de monto falló]";
+                    return;
+                }
 
-            // Obtener porcentaje de propina
-            if (!ObtenerPorcentajePropina(out double porcentaje))
-                return;
+                // Obtener porcentaje de propina
+                if (!ObtenerPorcentajePropina(out double porcentaje))
+                {
+                    txtError.Text += " [Debug: Validación de porcentaje falló]";
+                    return;
+                }
 
-            // Calcular propina y total
-            var monto = double.Parse(txtMonto.Text, NumberStyles.Float, _cultureArgentina);
-            var propina = monto * (porcentaje / 100.0);
-            var total = monto + propina;
+                // Calcular propina y total
+                var monto = double.Parse(txtMonto.Text, NumberStyles.Float, _cultureArgentina);
+                var propina = monto * (porcentaje / 100.0);
+                var total = monto + propina;
 
-            // Mostrar resultados
-            MostrarResultados(monto, porcentaje, propina, total);
+                // Debug: mostrar valores calculados
+                txtError.Text = $"Debug: monto={monto}, porcentaje={porcentaje}, propina={propina}, total={total}";
+
+                // Mostrar resultados de forma simple primero
+                txtMontoCuenta.Text = monto.ToString();
+                txtPorcentajeUsado.Text = porcentaje.ToString() + "%";
+                txtPropina.Text = propina.ToString();
+                txtTotal.Text = total.ToString();
+
+                // Mostrar resultados formateados
+                MostrarResultados(monto, porcentaje, propina, total);
+                
+                // Limpiar mensaje de debug después de un momento
+                System.Threading.Tasks.Task.Delay(2000).ContinueWith(_ => 
+                {
+                    Dispatcher.Invoke(() => txtError.Text = string.Empty);
+                });
+            }
+            catch (Exception ex)
+            {
+                txtError.Text = $"Error: {ex.Message}";
+            }
         }
 
         private bool ValidarMonto()
@@ -106,10 +134,21 @@ namespace PGE_T6.Views
 
         private void MostrarResultados(double monto, double porcentaje, double propina, double total)
         {
-            txtMontoCuenta.Text = $"${monto:N2}".Replace(".", ",");
-            txtPorcentajeUsado.Text = $"{porcentaje:F1}%";
-            txtPropina.Text = $"${propina:N2}".Replace(".", ",");
-            txtTotal.Text = $"${total:N2}".Replace(".", ",");
+            try
+            {
+                // Formatear con cultura argentina
+                txtMontoCuenta.Text = monto.ToString("C", _cultureArgentina);
+                txtPorcentajeUsado.Text = $"{porcentaje:F1}%";
+                txtPropina.Text = propina.ToString("C", _cultureArgentina);
+                txtTotal.Text = total.ToString("C", _cultureArgentina);
+                
+                // Debug adicional
+                System.Diagnostics.Debug.WriteLine($"Mostrando resultados: {monto} -> {txtMontoCuenta.Text}");
+            }
+            catch (Exception ex)
+            {
+                txtError.Text = $"Error al mostrar resultados: {ex.Message}";
+            }
         }
 
         private void BtnLimpiar_Click(object sender, RoutedEventArgs e)
