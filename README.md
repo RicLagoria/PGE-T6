@@ -1,6 +1,6 @@
 # PGE-T6
 
-Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. El Ejercicio 1 (Conversor de Temperatura) está implementado con code-behind y validación regional para Argentina (es-AR).
+Aplicación WPF (.NET 8) con una interfaz basada en pestañas (TabControl) para 11 ejercicios. El Ejercicio 1 (Conversor de Temperatura) está implementado con code-behind y validación regional para Argentina (es-AR). El Ejercicio 2 (Dibujo Libre) permite trazar líneas sobre un Canvas con selección de color y grosor.
 
 ## Estructura
 
@@ -11,7 +11,8 @@ PGE-T6/
 ├── Views/
 │   ├── Ej01View.xaml
 │   ├── Ej01View.xaml.cs
-│   ├── Ej02View.xaml (placeholder)
+│   ├── Ej02View.xaml
+│   ├── Ej02View.xaml.cs
 │   ├── Ej03View.xaml (placeholder)
 │   ├── Ej04View.xaml (placeholder)
 │   ├── Ej05View.xaml (placeholder)
@@ -54,3 +55,13 @@ dotnet run
 | "" | Error | Campo vacío |
 | "abc" | Error | Texto no numérico |
 | -300 | Error | Menor al cero absoluto |
+
+## Ejercicio 2: Dibujo Libre en Canvas
+
+- Superficie de dibujo: `Canvas` con eventos `MouseDown`, `MouseMove`, `MouseUp`.
+- Trazo: segmentos `Line` conectando posiciones sucesivas del ratón.
+- Propiedades del trazo:
+  - Color seleccionable (`ComboBox`): Negro, Rojo, Verde, Azul, Naranja, Violeta.
+  - Grosor ajustable (`Slider`) de 1 a 12 px.
+- Botón "Limpiar" para borrar el lienzo.
+
